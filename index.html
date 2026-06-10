@@ -3,238 +3,1050 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPS - Shop Thể Thao</title>
+    <title>SPS - Shop Thể Thao Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #333;
+            --accent: #ffd700;
+            --light: #f5f5f5;
+            --white: #ffffff;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--secondary);
         }
+
+        /* HEADER */
         header {
-            background: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px;
-            text-align: center;
+            padding: 30px 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .container {
+
+        .header-top {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-bar {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 14px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+            background: none;
+            border: none;
+            transition: transform 0.3s;
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: black;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* NAV */
         nav {
-            background: #444;
-            padding: 10px;
-            margin-bottom: 20px;
+            background: rgba(0,0,0,0.1);
+            padding: 0;
+            display: flex;
+            max-width: 1200px;
+            margin: 15px auto 0;
+            border-radius: 0 0 8px 8px;
+            overflow-x: auto;
         }
+
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
+            padding: 12px 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
         }
+
         nav a:hover {
-            color: #ff6b6b;
+            background: rgba(255,255,255,0.1);
+            border-bottom-color: var(--accent);
         }
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+
+        /* CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
         }
-        .product-card {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
             text-align: center;
         }
-        .product-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
         }
-        .product-card h3 {
-            margin: 10px 0;
-            color: #333;
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 20px;
         }
-        .price {
-            font-size: 20px;
-            color: #ff6b6b;
+
+        .hero button {
+            background: var(--accent);
+            color: black;
+            padding: 12px 30px;
             font-weight: bold;
-            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
+
+        /* FILTER & SORT */
+        .filter-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-section select, .filter-section input {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* PRODUCTS GRID */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: var(--secondary);
+        }
+
+        .rating {
+            color: var(--accent);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .price-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            font-size: 22px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
         .old-price {
             text-decoration: line-through;
             color: #999;
             font-size: 14px;
         }
-        button {
-            background: #ff6b6b;
-            color: white;
+
+        .product-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 10px;
             border: none;
-            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
+            transition: all 0.3s;
         }
-        button:hover {
+
+        .btn-add {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-add:hover {
             background: #e63946;
         }
+
+        .btn-wishlist {
+            background: #f0f0f0;
+            color: var(--secondary);
+        }
+
+        .btn-wishlist:hover {
+            background: var(--accent);
+            color: black;
+        }
+
+        /* CART INFO */
         .cart-info {
             background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
+
+        .cart-stats {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-action {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-view-cart {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-view-cart:hover {
+            background: #e63946;
+        }
+
+        .btn-checkout {
+            background: var(--accent);
+            color: black;
+        }
+
+        .btn-checkout:hover {
+            background: #ffed4e;
+        }
+
+        /* NOTIFICATION */
         .notification {
             position: fixed;
-            top: 20px;
+            top: 100px;
             right: 20px;
             background: #27ae60;
             color: white;
             padding: 15px 20px;
-            border-radius: 5px;
+            border-radius: 8px;
             z-index: 1000;
             animation: slideIn 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            gap: 10px;
+            align-items: center;
         }
+
         @keyframes slideIn {
-            from { transform: translateX(400px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+        }
+
+        .close-btn {
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #999;
+            background: none;
+            border: none;
+        }
+
+        .close-btn:hover {
+            color: var(--primary);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid var(--light);
+            gap: 15px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-qty {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .qty-btn {
+            background: var(--light);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .qty-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .cart-total {
+            text-align: right;
+            padding: 20px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-top: 2px solid var(--light);
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-footer button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #555;
+            color: #999;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+            }
+
+            .search-bar {
+                min-width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .products {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .cart-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .modal-content {
+                margin: 20% auto;
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>🏀 SPS - Shop Thể Thao</h1>
+        <div class="header-top">
+            <div class="logo">
+                <i class="fas fa-basketball"></i> SPS Shop
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm sản phẩm..." id="searchInput">
+                <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="header-icons">
+                <button class="icon-btn" onclick="openCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </button>
+                <button class="icon-btn" onclick="toggleWishlist()">
+                    <i class="fas fa-heart"></i>
+                </button>
+                <button class="icon-btn" onclick="toggleAccount()">
+                    <i class="fas fa-user"></i>
+                </button>
+            </div>
+        </div>
     </header>
 
     <nav>
-        <a href="#home">TRANG CHỦ</a>
-        <a href="#products">SẢN PHẨM</a>
-        <a href="#about">GIỚI THIỆU</a>
-        <a href="#contact">LIÊN HỆ</a>
+        <a href="#home"><i class="fas fa-home"></i> TRANG CHỦ</a>
+        <a href="#products"><i class="fas fa-box"></i> SẢN PHẨM</a>
+        <a href="#flash-sale"><i class="fas fa-bolt"></i> FLASH SALE</a>
+        <a href="#about"><i class="fas fa-info-circle"></i> GIỚI THIỆU</a>
+        <a href="#contact"><i class="fas fa-envelope"></i> LIÊN HỆ</a>
     </nav>
 
     <div class="container">
-        <div class="cart-info">
-            <strong>🛒 Giỏ hàng:</strong> <span id="cart-count">0</span> sản phẩm | 
-            <strong>Tổng tiền:</strong> <span id="cart-total">0 đ</span>
-            <button onclick="showCart()" style="float: right; margin-top: -5px;">Xem Giỏ</button>
+        <div class="hero">
+            <h1>🎉 ĐỒ THỂ THAO CHẤT LƯỢNG CAO</h1>
+            <p>Giảm giá tới 50% cho các sản phẩm được chọn</p>
+            <button class="btn btn-add" onclick="document.getElementById('products').scrollIntoView()">
+                MUA NGAY
+            </button>
         </div>
 
-        <h2 id="products">📦 SPECIAL SALE!</h2>
-        <div class="products">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=300&h=200&fit=crop" alt="Áo thể thao">
-                <h3>Áo Thể Thao</h3>
-                <div class="old-price">850.000đ</div>
-                <div class="price">475.000đ</div>
-                <button onclick="addToCart('Áo Thể Thao', 475000)">Thêm vào giỏ</button>
+        <div class="cart-info">
+            <div class="cart-stats">
+                <div class="stat">
+                    <span class="stat-label">Sản phẩm trong giỏ</span>
+                    <span class="stat-value" id="cart-count">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Tổng tiền</span>
+                    <span class="stat-value" id="cart-total">0đ</span>
+                </div>
             </div>
-
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=300&h=200&fit=crop" alt="Áo thể thao 2">
-                <h3>Áo Thể Thao 2</h3>
-                <div class="old-price">750.000đ</div>
-                <div class="price">375.000đ</div>
-                <button onclick="addToCart('Áo Thể Thao 2', 375000)">Thêm vào giỏ</button>
+            <div class="cart-actions">
+                <button class="btn-action btn-view-cart" onclick="openCart()">
+                    <i class="fas fa-eye"></i> Xem Giỏ Hàng
+                </button>
+                <button class="btn-action btn-checkout">
+                    <i class="fas fa-credit-card"></i> Thanh Toán
+                </button>
             </div>
+        </div>
 
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=300&h=200&fit=crop" alt="Áo Cầu Lông">
-                <h3>Áo Cầu Lông (Nữ)</h3>
-                <div class="old-price">550.000đ</div>
-                <div class="price">275.000đ</div>
-                <button onclick="addToCart('Áo Cầu Lông', 275000)">Thêm vào giỏ</button>
+        <div class="filter-section">
+            <select id="categoryFilter" onchange="filterProducts()">
+                <option value="">Tất cả danh mục</option>
+                <option value="áo">Áo Thể Thao</option>
+                <option value="giày">Giày</option>
+                <option value="dụng cụ">Dụng Cụ</option>
+            </select>
+            <select id="sortFilter" onchange="sortProducts()">
+                <option value="">Sắp xếp theo</option>
+                <option value="price-low">Giá: Thấp → Cao</option>
+                <option value="price-high">Giá: Cao → Thấp</option>
+                <option value="newest">Mới nhất</option>
+            </select>
+        </div>
+
+        <h2 id="products" style="margin-bottom: 20px;">📦 DANH SÁCH SẢN PHẨM</h2>
+        <div class="products" id="productsContainer"></div>
+    </div>
+
+    <!-- CART MODAL -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-shopping-cart"></i> Giỏ Hàng Của Bạn</h2>
+                <button class="close-btn" onclick="closeCart()">&times;</button>
             </div>
-
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=200&fit=crop" alt="Giày Skecher">
-                <h3>Giày Skecher</h3>
-                <div class="old-price">3.550.000đ</div>
-                <div class="price">2.750.000đ</div>
-                <button onclick="addToCart('Giày Skecher', 2750000)">Thêm vào giỏ</button>
+            <div id="cartItems"></div>
+            <div class="cart-total">
+                Tổng: <span id="cartTotalPrice">0đ</span>
             </div>
-
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=300&h=200&fit=crop" alt="Bộ Đồ Thể Thao">
-                <h3>Bộ Đồ Thể Thao</h3>
-                <div class="old-price">950.000đ</div>
-                <div class="price">675.000đ</div>
-                <button onclick="addToCart('Bộ Đồ Thể Thao', 675000)">Thêm vào giỏ</button>
-            </div>
-
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1622279457486-62dce4a41136?w=300&h=200&fit=crop" alt="Vợt Pickleball">
-                <h3>AMAKIRK VT TOUR</h3>
-                <div class="old-price">4.850.000đ</div>
-                <div class="price">3.650.000đ</div>
-                <button onclick="addToCart('AMAKIRK VT TOUR', 3650000)">Thêm vào giỏ</button>
+            <div class="modal-footer">
+                <button style="background: #ccc; color: black;" onclick="closeCart()">Tiếp tục mua</button>
+                <button style="background: var(--primary); color: white;">Thanh toán</button>
             </div>
         </div>
     </div>
 
-    <script>
-        let cart = [];
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Về SPS Shop</h4>
+                <ul>
+                    <li><a href="#">Về chúng tôi</a></li>
+                    <li><a href="#">Tin tức</a></li>
+                    <li><a href="#">Nhân viên</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Hỗ Trợ</h4>
+                <ul>
+                    <li><a href="#">Trung tâm trợ giúp</a></li>
+                    <li><a href="#">Liên hệ hỗ trợ</a></li>
+                    <li><a href="#">Chính sách trả hàng</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Chính Sách</h4>
+                <ul>
+                    <li><a href="#">Điều khoản sử dụng</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Chính sách cookie</a></li>
+                    <li><a href="#">Tuyên bố miễn trừ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Kết Nối</h4>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SPS Shop - Đồ Thể Thao Premium. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
 
-        function addToCart(name, price) {
-            const item = cart.find(p => p.name === name);
+    <script>
+        // Products Data
+        const products = [
+            {
+                id: 1,
+                name: 'Áo Thể Thao Nam',
+                price: 475000,
+                oldPrice: 850000,
+                image: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=300&h=200&fit=crop',
+                category: 'áo',
+                rating: 4.5,
+                discount: 44
+            },
+            {
+                id: 2,
+                name: 'Áo Thể Thao Nữ',
+                price: 375000,
+                oldPrice: 750000,
+                image: 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=300&h=200&fit=crop',
+                category: 'áo',
+                rating: 4.8,
+                discount: 50
+            },
+            {
+                id: 3,
+                name: 'Áo Cầu Lông (Nữ)',
+                price: 275000,
+                oldPrice: 550000,
+                image: 'https://images.unsplash.com/photo-1617137968427-85924c800a22?w=300&h=200&fit=crop',
+                category: 'áo',
+                rating: 4.6,
+                discount: 50
+            },
+            {
+                id: 4,
+                name: 'Giày Skecher Sport',
+                price: 2750000,
+                oldPrice: 3550000,
+                image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=200&fit=crop',
+                category: 'giày',
+                rating: 4.7,
+                discount: 23
+            },
+            {
+                id: 5,
+                name: 'Bộ Đồ Thể Thao',
+                price: 675000,
+                oldPrice: 950000,
+                image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=300&h=200&fit=crop',
+                category: 'áo',
+                rating: 4.4,
+                discount: 29
+            },
+            {
+                id: 6,
+                name: 'Vợt Pickleball AMAKIRK',
+                price: 3650000,
+                oldPrice: 4850000,
+                image: 'https://images.unsplash.com/photo-1622279457486-62dce4a41136?w=300&h=200&fit=crop',
+                category: 'dụng cụ',
+                rating: 4.9,
+                discount: 25
+            },
+            {
+                id: 7,
+                name: 'Giày Chạy Nike',
+                price: 2200000,
+                oldPrice: 3200000,
+                image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=200&fit=crop',
+                category: 'giày',
+                rating: 4.8,
+                discount: 31
+            },
+            {
+                id: 8,
+                name: 'Áo Bóng Rổ',
+                price: 325000,
+                oldPrice: 550000,
+                image: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=300&h=200&fit=crop',
+                category: 'áo',
+                rating: 4.5,
+                discount: 41
+            }
+        ];
+
+        let cart = [];
+        let wishlist = [];
+
+        // Initialize
+        function init() {
+            loadCart();
+            loadWishlist();
+            renderProducts(products);
+        }
+
+        // Render Products
+        function renderProducts(productsToShow) {
+            const container = document.getElementById('productsContainer');
+            container.innerHTML = productsToShow.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                        <div class="product-badge">${product.discount}% OFF</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <div class="rating">
+                            ${'⭐'.repeat(Math.floor(product.rating))} (${product.rating})
+                        </div>
+                        <div class="price-section">
+                            <span class="price">${product.price.toLocaleString('vi-VN')}đ</span>
+                            <span class="old-price">${product.oldPrice.toLocaleString('vi-VN')}đ</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-add" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">
+                                <i class="fas fa-plus"></i> Giỏ
+                            </button>
+                            <button class="btn btn-wishlist" onclick="addToWishlist(${product.id})">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Add to Cart
+        function addToCart(id, name, price) {
+            const item = cart.find(p => p.id === id);
             if (item) {
                 item.qty++;
             } else {
-                cart.push({name, price, qty: 1});
+                cart.push({id, name, price, qty: 1});
             }
             updateCart();
+            saveCart();
             showNotification(`✅ ${name} đã được thêm vào giỏ!`);
         }
 
+        // Update Cart Display
         function updateCart() {
             const count = cart.reduce((sum, item) => sum + item.qty, 0);
             const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
             
             document.getElementById('cart-count').innerText = count;
-            document.getElementById('cart-total').innerText = total.toLocaleString('vi-VN') + ' đ';
-            
-            localStorage.setItem('cart', JSON.stringify(cart));
+            document.getElementById('cart-badge').innerText = count;
+            document.getElementById('cart-total').innerText = total.toLocaleString('vi-VN') + 'đ';
+            renderCartItems();
         }
 
-        function showCart() {
+        // Render Cart Items
+        function renderCartItems() {
+            const cartItemsContainer = document.getElementById('cartItems');
             if (cart.length === 0) {
-                alert('📭 Giỏ hàng trống!');
+                cartItemsContainer.innerHTML = '<p style="text-align: center; color: #999;">📭 Giỏ hàng của bạn trống</p>';
                 return;
             }
-            let msg = '🛒 GIỎ HÀNG CỦA BẠN:\n\n';
-            let total = 0;
-            cart.forEach((item, i) => {
-                const subtotal = item.price * item.qty;
-                total += subtotal;
-                msg += `${i+1}. ${item.name}\n   Giá: ${item.price.toLocaleString('vi-VN')} đ\n   Số lượng: ${item.qty}\n   Thành tiền: ${subtotal.toLocaleString('vi-VN')} đ\n\n`;
-            });
-            msg += `💰 TỔNG CỘNG: ${total.toLocaleString('vi-VN')} đ`;
-            alert(msg);
+            
+            cartItemsContainer.innerHTML = cart.map((item, i) => `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <strong>${item.name}</strong>
+                        <p style="color: #666; margin-top: 5px;">${item.price.toLocaleString('vi-VN')}đ</p>
+                    </div>
+                    <div class="cart-item-qty">
+                        <button class="qty-btn" onclick="decreaseQty(${i})">-</button>
+                        <span style="min-width: 30px; text-align: center;">${item.qty}</span>
+                        <button class="qty-btn" onclick="increaseQty(${i})">+</button>
+                        <button class="qty-btn" style="background: var(--primary); color: white;" onclick="removeFromCart(${i})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            document.getElementById('cartTotalPrice').innerText = total.toLocaleString('vi-VN') + 'đ';
         }
 
+        // Cart Functions
+        function increaseQty(index) {
+            cart[index].qty++;
+            updateCart();
+            saveCart();
+        }
+
+        function decreaseQty(index) {
+            if (cart[index].qty > 1) {
+                cart[index].qty--;
+            } else {
+                removeFromCart(index);
+            }
+            updateCart();
+            saveCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+            saveCart();
+        }
+
+        // Open/Close Cart
+        function openCart() {
+            document.getElementById('cartModal').style.display = 'block';
+            renderCartItems();
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        // Wishlist
+        function addToWishlist(id) {
+            if (wishlist.includes(id)) {
+                wishlist = wishlist.filter(p => p !== id);
+            } else {
+                wishlist.push(id);
+            }
+            saveWishlist();
+            showNotification('❤️ Đã thêm vào danh sách yêu thích!');
+        }
+
+        function toggleWishlist() {
+            alert('❤️ Danh sách yêu thích của bạn có ' + wishlist.length + ' sản phẩm');
+        }
+
+        function toggleAccount() {
+            alert('👤 Tính năng đăng nhập sẽ được cập nhật sớm!');
+        }
+
+        // Search & Filter
+        function searchProducts() {
+            const keyword = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
+            renderProducts(filtered);
+        }
+
+        function filterProducts() {
+            const category = document.getElementById('categoryFilter').value;
+            const filtered = category ? products.filter(p => p.category === category) : products;
+            renderProducts(filtered);
+        }
+
+        function sortProducts() {
+            const sort = document.getElementById('sortFilter').value;
+            let sorted = [...products];
+            
+            if (sort === 'price-low') sorted.sort((a, b) => a.price - b.price);
+            if (sort === 'price-high') sorted.sort((a, b) => b.price - a.price);
+            if (sort === 'newest') sorted.reverse();
+            
+            renderProducts(sorted);
+        }
+
+        // Notifications
         function showNotification(msg) {
             const notif = document.createElement('div');
             notif.className = 'notification';
-            notif.innerText = msg;
+            notif.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
             document.body.appendChild(notif);
             setTimeout(() => notif.remove(), 3000);
         }
 
-        // Load cart khi mở trang
-        window.addEventListener('load', () => {
+        // Local Storage
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function loadCart() {
             const saved = localStorage.getItem('cart');
             if (saved) {
                 cart = JSON.parse(saved);
                 updateCart();
             }
-        });
+        }
+
+        function saveWishlist() {
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        }
+
+        function loadWishlist() {
+            const saved = localStorage.getItem('wishlist');
+            if (saved) {
+                wishlist = JSON.parse(saved);
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('cartModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('load', init);
     </script>
 </body>
 </html>
